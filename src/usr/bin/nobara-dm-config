@@ -1,0 +1,34 @@
+#! /bin/bash
+
+rm -r /tmp/zenity/nobara-lightdm-config/
+mkdir -p /tmp/zenity/nobara-lightdm-config/
+
+grep 'gdm' /etc/systemd/system/display-manager.service && export GDM_STATE=TRUE || export GDM_STATE=FALSE
+grep 'sddm' /etc/systemd/system/display-manager.service && export SDDM_STATE=TRUE || export SDDM_STATE=FALSE
+grep 'lightdm' /etc/systemd/system/display-manager.service && export LIGHTDM_STATE=TRUE || export LIGHTDM_STATE=FALSE
+
+zenity --title='Select a login manager' --list --column Selection --column 'Login manager' --column 'Description' "$GDM_STATE" GDM 'The Gnome Display Manager , Used mainly by the GNOME Desktop Environment.' "$SDDM_STATE" SDDM 'The Simple Display Manager , Used mainly by the KDE Desktop Environment.' "$LIGHTDM_STATE" LightDM 'A cross-desktop display manager , can be used everywhere!' --radiolist --width=900 --height=250 | tee -a /tmp/zenity/nobara-lightdm-config/selection
+
+if [ -s /tmp/zenity/nobara-lightdm-config/selection ]
+then
+    
+    if [[ "$(cat /tmp/zenity/nobara-lightdm-config/selection)" == GDM ]];
+    then
+    pkexec bash -c "dnf install -y gdm && systemctl enable gdm" && zenity --info --title='Install Complete' --text='GDM install is complete!' || zenity --error --title='Install Failed' --text='GDM Failed!'
+    fi
+    
+    if [[ "$(cat /tmp/zenity/nobara-lightdm-config/selection)" == SDDM ]];
+    then
+    pkexec bash -c "dnf install -y sddm && systemctl enable sddm" && zenity --info --title='Install Complete' --text='SDDM install is complete!' || zenity --error --title='Install Failed' --text='SDDM Failed!'
+    fi
+    
+    if [[ "$(cat /tmp/zenity/nobara-lightdm-config/selection)" == LightDM ]];
+    then
+    pkexec bash -c "dnf install -y lightdm && systemctl enable lightdm" && zenity --info --title='Install Complete' --text='LightDM install is complete!' || zenity --error --title='Install Failed' -- text='LightDM Failed!'
+    fi
+    
+    if [[ "$(cat /tmp/zenity/nobara-lightdm-config/selection)" == "" ]];
+    then
+    zenity --error --title='Something Went Really Wrong!' --text='Your System is dead chief!'
+    fi
+fi
