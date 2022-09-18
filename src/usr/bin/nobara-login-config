@@ -24,7 +24,7 @@ then
     
     if [[ "$(cat /tmp/zenity/nobara-lightdm-config/selection)" == LightDM ]];
     then
-    pkexec  bash -c "sudo systemctl disable gdm & sudo systemctl disable sddm & sudo systemctl disable lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings & dnf install -y lightdm && systemctl enable lightdm" && zenity --info --title='Install Complete' --text='LightDM install is complete!' || zenity --error --title='Install Failed' -- text='LightDM Failed!'
+    pkexec  bash -c "sudo systemctl disable gdm & sudo systemctl disable sddm & sudo systemctl disable lightdm & dnf install -y lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings  && systemctl enable lightdm" && zenity --info --title='Install Complete' --text='LightDM install is complete!' || zenity --error --title='Install Failed' -- text='LightDM Failed!'
     fi
     
     if [[ "$(cat /tmp/zenity/nobara-lightdm-config/selection)" == "" ]];
