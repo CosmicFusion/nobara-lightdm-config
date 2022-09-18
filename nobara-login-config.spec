@@ -2,7 +2,7 @@ BuildArch:              noarch
 
 Name:          nobara-login-config
 Version:       0.1
-Release:       2%{?dist}
+Release:       3%{?dist}
 License:       GPLv2
 Group:         System Environment/Libraries
 Summary:       GUI Login Selector
