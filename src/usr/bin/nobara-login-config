@@ -7,7 +7,7 @@ grep 'gdm' /etc/systemd/system/display-manager.service && export GDM_STATE=TRUE 
 grep 'sddm' /etc/systemd/system/display-manager.service && export SDDM_STATE=TRUE || export SDDM_STATE=FALSE
 grep 'lightdm' /etc/systemd/system/display-manager.service && export LIGHTDM_STATE=TRUE || export LIGHTDM_STATE=FALSE
 
-zenity --title='Select a login manager' --list --column Selection --column 'Login manager' --column 'Description' "$GDM_STATE" GDM 'The Gnome Display Manager , Used mainly by the GNOME Desktop Environment.' "$SDDM_STATE" SDDM 'The Simple Display Manager , Used mainly by the KDE Desktop Environment.' "$LIGHTDM_STATE" LightDM 'A cross-desktop display manager , can be used everywhere!' --radiolist --width=900 --height=250 | tee -a /tmp/zenity/nobara-lightdm-config/selection
+zenity --title='Select a login manager' --list --column Selection --column 'Login manager' --column 'Description' "$GDM_STATE" GDM 'The Gnome Display Manager, Used mainly by the GNOME Desktop Environment.' "$SDDM_STATE" SDDM 'The Simple Display Manager, Used mainly by the KDE Desktop Environment.' "$LIGHTDM_STATE" LightDM 'A cross-desktop display manager, can be used everywhere!' --radiolist --width=900 --height=250 | tee -a /tmp/zenity/nobara-lightdm-config/selection
 
 if [ -s /tmp/zenity/nobara-lightdm-config/selection ]
 then
@@ -29,6 +29,6 @@ then
     
     if [[ "$(cat /tmp/zenity/nobara-lightdm-config/selection)" == "" ]];
     then
-    zenity --error --title='Something Went Really Wrong!' --text='Your System is dead chief!'
+    zenity --error --title='Something Went Really Wrong!' --text='Major System Error, is a DM present!?'
     fi
 fi
