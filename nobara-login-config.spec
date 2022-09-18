@@ -19,6 +19,7 @@ Requires:	zenity
 %install
 tar -xf %{SOURCE0}
 mv usr %{buildroot}/
+mkdir -p %{buildroot}/usr/share/licenses/nobara-login-config
 wget https://raw.githubusercontent.com/CosmicFusion/nobara-login-config/main/LICENSE.md -O %{buildroot}/usr/share/licenses/nobara-login-config/LICENSE
 
 %description
