@@ -10,7 +10,7 @@ Summary:       GUI Login Selector
 
 URL:           https://github.com/CosmicFusion/nobara-login-config
 
-Source0:        %{name}-%{version}-%{release}.tar.gz
+Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:	wget
 Requires:      /usr/bin/bash
