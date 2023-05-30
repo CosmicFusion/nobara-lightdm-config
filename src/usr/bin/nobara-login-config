@@ -14,19 +14,19 @@ then
     
     if [[ "$(cat /tmp/zenity/nobara-lightdm-config/selection)" == GDM ]];
     then
-    	pkexec  bash -c "dnf install -y gdm && systemctl disable gdm & sudo systemctl disable sddm & sudo systemctl disable lightdm & systemctl enable gdm" \
+    	pkexec  bash -c "dnf install -y gdm && systemctl disable gdm || echo 'moving on' && sudo systemctl disable sddm || echo 'moving on' && sudo systemctl disable lightdm || echo 'moving on' && systemctl enable gdm" \
     	&& zenity --info --title='Install Complete' --text='GDM install is complete!' || zenity --error --title='Install Failed' --text='GDM Failed!'
     fi
     
     if [[ "$(cat /tmp/zenity/nobara-lightdm-config/selection)" == SDDM ]];
     then
-    	pkexec  bash -c "dnf install -y sddm && systemctl disable gdm & sudo systemctl disable sddm & sudo systemctl disable lightdm & systemctl enable sddm" \
+    	pkexec  bash -c "dnf install -y sddm && systemctl disable gdm || echo 'moving on' && sudo systemctl disable sddm || echo 'moving on' && sudo systemctl disable lightdm || echo 'moving on' && systemctl enable sddm" \
     	&& zenity --info --title='Install Complete' --text='SDDM install is complete!' || zenity --error --title='Install Failed' --text='SDDM Failed!'
     fi
     
     if [[ "$(cat /tmp/zenity/nobara-lightdm-config/selection)" == LightDM ]];
     then
-    	pkexec  bash -c "dnf install -y lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings && systemctl disable gdm & sudo systemctl disable sddm & sudo systemctl disable lightdm & systemctl enable lightdm" \
+    	pkexec  bash -c "dnf install -y lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings && systemctl disable gdm || echo 'moving on' && sudo systemctl disable sddm || echo 'moving on' && sudo systemctl disable lightdm || echo 'moving on' && systemctl enable lightdm" \
     	&& zenity --info --title='Install Complete' --text='LightDM install is complete!' || zenity --error --title='Install Failed' -- text='LightDM Failed!'
     fi
     
